@@ -1,0 +1,501 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/addresses":
+    post:
+      summary: Create address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: object
+                  properties:
+                    house_number:
+                      type: integer
+                    street:
+                      type: string
+                    city:
+                      type: string
+                    state:
+                      type: string
+                    country:
+                      type: string
+                    zip_code:
+                      type: integer
+                    property_id:
+                      type: integer
+              required:
+                - address
+      responses:
+        '200':
+          description: Successful
+
+
+  "/api/v1/addresses/{address_id}":
+    patch:
+      summary: Update address
+      parameters:
+        - name: address_id
+          in: path
+          description: ID of the address to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: object
+                  properties:
+                    house_number:
+                      type: integer
+                    street:
+                      type: string
+                    city:
+                      type: string
+                    state:
+                      type: string
+                    country:
+                      type: string
+                    zip_code:
+                      type: integer
+              required:
+                - address
+      responses:
+        '200':
+          description: Successful
+
+  "/api/v1/auth/sign_in":
+    post:
+      summary: Sign in
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Successful
+
+  "/api/v1/properties":
+    get:
+      summary: List properties
+    responses:
+        '200':
+          description: Successful
+    post:
+      summary: Create property
+      requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  property:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      no_bedrooms:
+                        type: integer
+                      no_baths:
+                        type: integer
+                      no_beds:
+                        type: integer
+                      area:
+                        type: number
+                      user_id:
+                        type: integer
+                      category_id:
+                        type: integer
+                      images:
+                        type: array
+                        items:
+                          type: string
+              required:
+                - name
+                - description
+                - no_bedrooms
+                - no_baths
+                - no_beds
+                - area
+                - user_id
+                - category_id
+      responses:
+        '200':
+          description: Successful
+
+  "/api/v1/properties/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Show property
+      responses:
+        '200':
+          description: Successful
+    patch:
+      summary: Update property
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                property:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    no_bedrooms:
+                      type: integer
+                    no_baths:
+                      type: integer
+                    no_beds:
+                      type: integer
+                    area:
+                      type: number
+                    category_id:
+                      type: integer
+                    images:
+                      type: array
+                      items:
+                        type: string
+              required:
+                - property
+      responses:
+        '200':
+          description: Successful
+    put:
+      summary: Update property
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                property:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    no_bedrooms:
+                      type: integer
+                    no_baths:
+                      type: integer
+                    no_beds:
+                      type: integer
+                    area:
+                      type: number
+                    category_id:
+                      type: integer
+                    images:
+                      type: array
+                      items:
+                        type: string
+              required:
+                - property
+      responses:
+        '200':
+          description: Successful
+    delete:
+      summary: Delete property
+      responses:
+        '200':
+          description: Successful
+
+
+  "/api/v1/reservation_criterias":
+    get:
+      summary: List reservation_criteria
+      responses:
+        '200':
+          description: Successful
+    post:
+      summary: Create reservation_criteria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                  type: object
+                  properties:
+                    time_period:
+                      type: string
+                    others_fee:
+                      type: number
+                    min_time_period:
+                      type: integer
+                    max_guest:
+                      type: integer
+                    rate:
+                      type: number
+                    property_id:
+                      type: integer
+            required:
+                - reservation_criteria
+      responses:
+        '200':
+          description: Successful
+
+  "/api/v1/reservation_criterias/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Show reservation_criteria
+      responses:
+        '200':
+          description: Successful
+    patch:
+      summary: Update reservation_criteria
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                  type: object
+                  properties:
+                    time_period:
+                      type: string
+                    others_fee:
+                      type: number
+                    min_time_period:
+                      type: integer
+                    max_guest:
+                      type: integer
+                    rate:
+                      type: number
+            required:
+                - reservation_criteria
+      responses:
+        '200':
+          description: Successful
+    put:
+      summary: Update reservation_criteria
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                  type: object
+                  properties:
+                    time_period:
+                      type: string
+                    others_fee:
+                      type: number
+                    min_time_period:
+                      type: integer
+                    max_guest:
+                      type: integer
+                    rate:
+                      type: number
+            required:
+                - reservation_criteria
+      responses:
+        '200':
+          description: Successful
+    delete:
+      summary: Delete reservation_criteria
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+
+  "/api/v1/reservations":
+    get:
+      summary: List reservations
+      parameters:
+        - name: Authorization
+          in: query
+          description: Authorization token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+    post:
+      summary: Create reservation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                authorization:
+                  type: string
+                reservation:
+                  type: object
+                  properties:
+                    start_date:
+                      type: string
+                    end_date:
+                      type: string
+                    guests:
+                      type: integer
+                    property_id:
+                      type: integer
+              required:
+                - authorization
+                - reservation
+      responses:
+        '200':
+          description: Successful
+
+  "/api/v1/reservations/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show reservation
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update reservation
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update reservation
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete reservation
+      responses:
+        '200':
+          description: successful
+  "/api/v1/users":
+    get:
+      summary: list users
+      responses:
+        '200':
+          description: successful
+  "/api/v1/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show user
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update user
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update user
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete user
+      responses:
+        '200':
+          description: successful
+  "/api/v1/auth/sign_up":
+    post:
+      summary: Create user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+                    avatar:
+                      type: string
+              required:
+                - name
+                - email
+                - role
+                - password
+                - password_confirmation
+      responses:
+        '200':
+          description: Successful
+servers:
+- url: http://127.0.0.1:4000
+  variables:
+    defaultHost:
+      default: '127.0.0.1:4000'
